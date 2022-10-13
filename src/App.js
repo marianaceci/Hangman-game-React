@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import './app.css';
+import GameBoard from './game-board';
+import WordSelect from './word-select';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    const [secretWord, setSecretWord] = useState('');
+
+    return (
+        <div className='app-container'>
+            <h2>Let's play Hangman!!</h2>
+
+            <div>
+
+                <WordSelect
+                    isShown={!secretWord}
+                    wordSelected={val => setSecretWord(val)}
+                />
+
+
+                <GameBoard
+                    secretWord={secretWord}
+                    maxErrors={6}
+                    isShown={secretWord}
+                />
+            </div>
+        </div>    
+    );
 }
-
-export default App;
